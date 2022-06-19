@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "67e7cf3c-ecef-48a1-a4dc-9299032a9a7e",
+		"name": "WeatherStationCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21481403"
+	},
+	"item": [
+		{
+			"name": "WeatherStationRequests",
+			"item": [
+				{
+					"name": "(add weather station)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 7,\r\n    \"manufactur\": \"WeatherStation\",\r\n    \"gpcOfWeatherStation\": \"6.8.56\",\r\n    \"dataOfInstallaton\": \"2/Nov/2021\",\r\n    \"locatoinOfWeatherstation\": \"Lviv (6.8.56)\",\r\n    \"dataOfServiceWorks\": \"23/Apr/2022\",\r\n    \"descriptionOfServiceWorks\": \"planned works\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStation/addWeatherStation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation",
+								"addWeatherStation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(update weather station)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 3,\r\n    \"manufactur\": \"NewWeatherStation\",\r\n    \"gpcOfWeatherStation\": \"6.8.56\",\r\n    \"dataOfInstallaton\": \"2/Nov/2021\",\r\n    \"locatoinOfWeatherstation\": \"Lviv (6.8.56)\",\r\n    \"dataOfServiceWorks\": \"23/Apr/2022\",\r\n    \"descriptionOfServiceWorks\": \"technical works\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStation/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(get weather station by ID)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStation/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(delete Weather Station)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 7,\r\n    \"manufactur\": \"NewWeatherStation\",\r\n    \"gpcOfWeatherStation\": \"6.8.56\",\r\n    \"dataOfInstallaton\": \"2/Nov/2021\",\r\n    \"locatoinOfWeatherstation\": \"Kyiv (6.8.56)\",\r\n    \"dataOfServiceWorks\": \"23/Apr/2022\",\r\n    \"descriptionOfServiceWorks\": \"technical works\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStation/7",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(weatherStations)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStation/weatherStations",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation",
+								"weatherStations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WeatherStationDataRequests",
+			"item": [
+				{
+					"name": "(add weather station data)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationDataId\": \"3\",\r\n    \"temperature\": \"28 C\",\r\n    \"humidity\": \"2 %\",\r\n    \"atmosphericPressure\": \"10000 Pa\",\r\n    \"speedOfWind\": \"4m/s\",\r\n    \"directionOfWind\": \"west\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStationData/addWeatherStationData",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData",
+								"addWeatherStationData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(update weather station data)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationDataId\": \"3\",\r\n    \"temperature\": \"28 C\",\r\n    \"humidity\": \"2 %\",\r\n    \"atmosphericPressure\": \"11000 Pa\",\r\n    \"speedOfWind\": \"4m/s\",\r\n    \"directionOfWind\": \"zahid\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStationData/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(get weather station data)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStationData/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(get weather station data(s))",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "(delete weather station data)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStationData/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
