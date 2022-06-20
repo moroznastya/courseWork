@@ -63,9 +63,6 @@ public class WeatherStationDataService {
             newWeatherStationData.setDirectionOfWind(oldWeatherStationData.getDirectionOfWind());
         }
 
-
-
-
         this.weatherStationDatas.put(newWeatherStationData.getWeatherStationDataId(), newWeatherStationData);
     }
 

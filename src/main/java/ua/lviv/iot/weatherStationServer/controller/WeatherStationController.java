@@ -9,7 +9,7 @@ import ua.lviv.iot.weatherStationServer.model.WeatherStation;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/weatherStation")
 public class WeatherStationController {
 
     @Autowired
