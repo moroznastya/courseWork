@@ -77,7 +77,7 @@ public class WeatherStationDataService {
 
 
     @PreDestroy
-    private void saveWeatherStationDatas() {
+    private void saveWeatherStationDatas() throws IOException{
         List<WeatherStationData> list = this.weatherStationDatas.values().stream().toList();
         weatherStationDataFileStorage.saveWeatherStationData(list);
     }

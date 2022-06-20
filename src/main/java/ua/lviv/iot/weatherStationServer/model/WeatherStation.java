@@ -1,7 +1,9 @@
 package ua.lviv.iot.weatherStationServer.model;
 
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @NoArgsConstructor
@@ -16,7 +18,7 @@ public class WeatherStation extends WeatherStationInfo {
 
     public String getHeaders() {
         return "weatherStationId, manufactur, gpcOfWeatherStation, " +
-                "dataOfInstallaton, locatoinOfWeatherstation, dataOfServiceWorks"
+                "dataOfInstallaton, locatoinOfWeatherstation, dataOfServiceWorks,"
                 + " descriptionOfServiceWorks";
     }
 

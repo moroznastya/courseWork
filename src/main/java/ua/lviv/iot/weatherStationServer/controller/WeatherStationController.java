@@ -1,6 +1,5 @@
 package ua.lviv.iot.weatherStationServer.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ua.lviv.iot.weatherStationServer.logic.WeatherStationService;
@@ -16,7 +15,7 @@ public class WeatherStationController {
     @Autowired
     private WeatherStationService weatherStationService;
 
-    @GetMapping
+    @GetMapping("/weatherStations")
     public List<WeatherStation> getWeatherStations() {
         return weatherStationService.getWeatherStations();
     }

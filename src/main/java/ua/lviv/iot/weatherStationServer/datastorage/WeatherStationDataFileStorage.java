@@ -1,10 +1,14 @@
 package ua.lviv.iot.weatherStationServer.datastorage;
+
 import org.springframework.stereotype.Component;
 import ua.lviv.iot.weatherStationServer.DateNow;
 import ua.lviv.iot.weatherStationServer.model.WeatherStationData;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
+import java.io.OutputStreamWriter;
 import java.util.List;
-
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -82,19 +86,15 @@ public class WeatherStationDataFileStorage {
     }
 
 
-    public void saveWeatherStationData(final List<WeatherStationData> weatherStationDatas) {
+    public void saveWeatherStationData(final List<WeatherStationData> weatherStationDatas) throws IOException{
         String date = DateNow.getTimeNow();
-
-
         File file = new File("files\\" + "weatherStationData-" + date + ".csv");
-        try (FileWriter writer = new FileWriter(file);) {
-            writer.write(weatherStationDatas.get(0).getHeaders() + "\n");
-            for (WeatherStationData weatherStationData: weatherStationDatas) {
-                writer.write(weatherStationData.toCSV() + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Writer writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+        writer.write(weatherStationDatas.get(0).getHeaders() + "\n");
+        for (WeatherStationData weatherStationData: weatherStationDatas) {
+            writer.write(weatherStationData.toCSV() + "\n");
         }
+        writer.close();
 
     }
 }

@@ -3,11 +3,9 @@ package ua.lviv.iot.weatherStationServer.datastorage;
 import org.springframework.stereotype.Component;
 import ua.lviv.iot.weatherStationServer.DateNow;
 import ua.lviv.iot.weatherStationServer.model.WeatherStation;
+import ua.lviv.iot.weatherStationServer.model.WeatherStationData;
 
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -90,13 +88,12 @@ public class WeatherStationFileStorage {
         String date = DateNow.getTimeNow();
 
         File file = new File("files//" +"weatherStation-" + date + ".csv");
-        try (FileWriter writer = new FileWriter(file)) {
-            writer.write(weatherStations.get(0).getHeaders() + "\n");
-            for (WeatherStation weatherStation : weatherStations) {
-                writer.write(weatherStation.toCSV() + "\n");
-            }
-
+        Writer writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+        writer.write(weatherStations.get(0).getHeaders() + "\n");
+        for (WeatherStation weatherStation: weatherStations) {
+            writer.write(weatherStation.toCSV() + "\n");
         }
+        writer.close();
 
     }
 }
