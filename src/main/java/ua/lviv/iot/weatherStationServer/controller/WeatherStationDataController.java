@@ -17,7 +17,7 @@ public class WeatherStationDataController {
     @Autowired
     private WeatherStationDataService weatherStationDataService;
 
-    @GetMapping("/weatherStationDatas")
+    @GetMapping
     public List<WeatherStationData> getWeatherStationDatas(){
         return weatherStationDataService.getWeatherStationDatas();
     }
@@ -27,7 +27,7 @@ public class WeatherStationDataController {
         return weatherStationDataService.getWeatherStationDataById(weatherStationDataId);
     }
 
-    @PostMapping("/addWeatherStationData")
+    @PostMapping
     public void addWeatherStationData(@RequestBody WeatherStationData weatherStationData) {
         weatherStationDataService.addWeatherStationData(weatherStationData);
     }

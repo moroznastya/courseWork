@@ -9,13 +9,13 @@ import ua.lviv.iot.weatherStationServer.model.WeatherStation;
 import java.util.List;
 
 @RestController
-@RequestMapping("/weatherStation")
+@RequestMapping
 public class WeatherStationController {
 
     @Autowired
     private WeatherStationService weatherStationService;
 
-    @GetMapping("/weatherStations")
+    @GetMapping
     public List<WeatherStation> getWeatherStations() {
         return weatherStationService.getWeatherStations();
     }
@@ -25,7 +25,7 @@ public class WeatherStationController {
         return weatherStationService.getWeatherStationById(weatherStationId);
     }
 
-    @PostMapping("/addWeatherStation")
+    @PostMapping
     public void addWeatherStation(@RequestBody WeatherStation weatherStation) {
         weatherStationService.addWeatherStation(weatherStation);
     }
