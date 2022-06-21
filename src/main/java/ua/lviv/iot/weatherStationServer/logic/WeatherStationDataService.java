@@ -81,8 +81,8 @@ public class WeatherStationDataService {
 
     @PostConstruct
     private void loadWeatherStationDatas() throws IOException, ParseException {
-        if (weatherStationDataFileStorage.fillWeatherStationDatas() != null) {
-            List<WeatherStationData> list = weatherStationDataFileStorage.fillWeatherStationDatas();
+        if (weatherStationDataFileStorage.findWeatherStationDataInMonth() != null) {
+            List<WeatherStationData> list = weatherStationDataFileStorage.findWeatherStationDataInMonth();
             for (WeatherStationData weatherStationData: list) {
                 this.weatherStationDatas.put(weatherStationData.getWeatherStationDataId(), weatherStationData);
             }

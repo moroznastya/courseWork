@@ -13,8 +13,8 @@ import lombok.Setter;
 public class WeatherStationInfo {
     public String manufactur;
     public String gpcOfWeatherStation;
-    public String dataOfInstallaton;
-    public String locatoinOfWeatherstation;
+    public String dataOfInstallation;
+    public String locationOfWeatherStation;
     public String dataOfServiceWorks;
     public String descriptionOfServiceWorks;
 

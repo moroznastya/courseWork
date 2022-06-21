@@ -18,13 +18,13 @@ public class WeatherStation extends WeatherStationInfo {
 
     public String getHeaders() {
         return "weatherStationId, manufactur, gpcOfWeatherStation, " +
-                "dataOfInstallaton, locatoinOfWeatherstation, dataOfServiceWorks,"
-                + " descriptionOfServiceWorks";
+                "dataOfInstallation, locationOfWeatherstation, dataOfServiceWorks, "
+                + "descriptionOfServiceWorks";
     }
 
     public String toCSV() {
         return weatherStationId + ", " + manufactur + ", " + gpcOfWeatherStation + ", "
-                + dataOfInstallaton + ", " + locatoinOfWeatherstation + ", "
+                + dataOfInstallation + ", " + locationOfWeatherStation + ", "
                 + dataOfServiceWorks + ", " + descriptionOfServiceWorks;
     }
 }

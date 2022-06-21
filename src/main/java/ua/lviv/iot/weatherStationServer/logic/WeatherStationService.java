@@ -21,14 +21,17 @@ public class WeatherStationService {
 
 
     @Autowired
-    WeatherStationFileStorage weatherStationFileStorage;
+    WeatherStationFileStorage weatherStationStore =new WeatherStationFileStorage();
+    //WeatherStationFileStorage weatherStationFileStorage;
 
 
     public List<WeatherStation> getWeatherStations() {
+
         return new LinkedList<>(this.weatherStations.values());
     }
 
     public WeatherStation getWeatherStationById(Long weatherStationId) {
+
         return weatherStations.get(weatherStationId);
     }
 
@@ -57,16 +60,16 @@ public class WeatherStationService {
             newWeatherStation.setGpcOfWeatherStation(oldWeatherStation.getGpcOfWeatherStation());
         }
 
-        if (weatherStation.getDataOfInstallaton() != null) {
-            newWeatherStation.setDataOfInstallaton(weatherStation.getDataOfInstallaton());
+        if (weatherStation.getDataOfInstallation() != null) {
+            newWeatherStation.setDataOfInstallation(weatherStation.getDataOfInstallation());
         } else {
-            newWeatherStation.setDataOfInstallaton(oldWeatherStation.getDataOfInstallaton());
+            newWeatherStation.setDataOfInstallation(oldWeatherStation.getDataOfInstallation());
         }
 
-        if (weatherStation.getLocatoinOfWeatherstation() != null) {
-            newWeatherStation.setLocatoinOfWeatherstation(weatherStation.getLocatoinOfWeatherstation());
+        if (weatherStation.getLocationOfWeatherStation() != null) {
+            newWeatherStation.setLocationOfWeatherStation(weatherStation.getLocationOfWeatherStation());
         } else {
-            newWeatherStation.setLocatoinOfWeatherstation(oldWeatherStation.getLocatoinOfWeatherstation());
+            newWeatherStation.setLocationOfWeatherStation(oldWeatherStation.getLocationOfWeatherStation());
         }
 
         if (weatherStation.getDataOfServiceWorks() != null) {
@@ -95,13 +98,13 @@ public class WeatherStationService {
     @PreDestroy
     private void saveWeatherStations() throws IOException {
         List<WeatherStation> list = this.weatherStations.values().stream().toList();
-        weatherStationFileStorage.saveWeatherStation(list);
+        weatherStationStore.saveWeatherStation(list);
     }
 
     @PostConstruct
     private void fillWeatherStations() throws IOException {
-        if (weatherStationFileStorage.fillWeatherStation() != null) {
-            List<WeatherStation> list = weatherStationFileStorage.fillWeatherStation();
+        if (weatherStationStore.findWeatherStationInMonth() != null) {
+            List<WeatherStation> list = weatherStationStore.findWeatherStationInMonth();
             for (WeatherStation weatherStation: list) {
                 this.weatherStations.put(weatherStation.getWeatherStationId(), weatherStation);
             }
