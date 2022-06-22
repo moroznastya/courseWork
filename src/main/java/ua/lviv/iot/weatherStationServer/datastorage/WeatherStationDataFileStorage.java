@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import ua.lviv.iot.weatherStationServer.model.WeatherStationData;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -53,12 +54,13 @@ public class WeatherStationDataFileStorage {
         int index = 0;
         for (String value : values) {
             switch (index) {
-                case 0 -> weatherStationData.setWeatherStationDataId(Long.parseLong(value));
+                case 0 -> weatherStationData.setWeatherStationId(Long.parseLong(value));
                 case 1 -> weatherStationData.setTemperature(value);
                 case 2 -> weatherStationData.setHumidity(value);
                 case 3 -> weatherStationData.setAtmosphericPressure(value);
                 case 4 -> weatherStationData.setSpeedOfWind(value);
                 case 5 -> weatherStationData.setDirectionOfWind(value);
+                default -> { }
 
             }
             index++;
@@ -72,7 +74,7 @@ public class WeatherStationDataFileStorage {
     public void saveWeatherStationData(List<WeatherStationData> weatherStationDatas) throws IOException {
 
         File file = new File("files//" + "weatherStation-" + LocalDate.now() + ".csv");
-        Writer writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+        Writer writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
         writer.write(weatherStationDatas.get(0).getHeaders() + "\n");
         for (WeatherStationData weatherStationData : weatherStationDatas) {
             writer.write(weatherStationData.toCSV() + "\n");

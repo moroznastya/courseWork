@@ -13,7 +13,7 @@ import lombok.Setter;
 
 
 public class WeatherStationData {
-    private Long weatherStationDataId;
+    private Long weatherStationId;
     public String temperature;
     public String humidity;
     public String atmosphericPressure;
@@ -23,13 +23,13 @@ public class WeatherStationData {
 
 
     public String getHeaders() {
-        return "weatherStationDataId " +
+        return "weatherStationId " +
                 "temperature "+"humidity "+"atmosphericPressure "+
                 "speedOfWind " + "directionOfWind";
     }
 
     public String toCSV() {
-        return weatherStationDataId + ", " + temperature + ", "
+        return weatherStationId + ", " + temperature + ", "
                 + humidity + ", " + atmosphericPressure + ", " +
                 speedOfWind + ", " + directionOfWind;
     }

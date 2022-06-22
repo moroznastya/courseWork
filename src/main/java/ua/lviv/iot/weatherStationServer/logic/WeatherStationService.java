@@ -72,18 +72,6 @@ public class WeatherStationService {
             newWeatherStation.setLocationOfWeatherStation(oldWeatherStation.getLocationOfWeatherStation());
         }
 
-        if (weatherStation.getDataOfServiceWorks() != null) {
-            newWeatherStation.setDataOfServiceWorks(weatherStation.getDataOfServiceWorks());
-        } else {
-            newWeatherStation.setDataOfServiceWorks(oldWeatherStation.getDataOfServiceWorks());
-        }
-
-        if (weatherStation.getDescriptionOfServiceWorks() != null) {
-            newWeatherStation.setDescriptionOfServiceWorks(weatherStation.getDescriptionOfServiceWorks());
-        } else {
-            newWeatherStation.setDescriptionOfServiceWorks(oldWeatherStation.getDescriptionOfServiceWorks());
-        }
-
 
         this.weatherStations.put(newWeatherStation.getWeatherStationId(), newWeatherStation);
     }

@@ -3,6 +3,7 @@ import org.springframework.stereotype.Component;
 import ua.lviv.iot.weatherStationServer.model.WeatherStation;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -62,10 +63,9 @@ public class WeatherStationFileStorage {
 
                 case 4 -> weatherStation.setLocationOfWeatherStation(value);
 
-                case 5 -> weatherStation.setDataOfServiceWorks(value);
-
-                case 6 -> weatherStation.setDescriptionOfServiceWorks(value);
+                default -> { }
             }
+
             index++;
 
         }
@@ -76,7 +76,7 @@ public class WeatherStationFileStorage {
 
 
         File file = new File("files//" + "weatherStation-" + LocalDate.now() + ".csv");
-        Writer writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+        Writer writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
         writer.write(weatherStations.get(0).getHeaders() + "\n");
         for (WeatherStation weatherStation : weatherStations) {
             writer.write(weatherStation.toCSV() + "\n");

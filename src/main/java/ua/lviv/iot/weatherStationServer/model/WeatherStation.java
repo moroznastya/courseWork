@@ -11,21 +11,24 @@ import lombok.Setter;
 @Setter
 @Getter
 
-public class WeatherStation extends WeatherStationInfo {
+public class WeatherStation  {
 
     private Long weatherStationId;
+    private String manufactur;
+    private String gpcOfWeatherStation;
+    private String dataOfInstallation;
+    private String locationOfWeatherStation;
+
 
 
     public String getHeaders() {
         return "weatherStationId, manufactur, gpcOfWeatherStation, " +
-                "dataOfInstallation, locationOfWeatherstation, dataOfServiceWorks, "
-                + "descriptionOfServiceWorks";
+                "dataOfInstallation, locationOfWeatherstation";
     }
 
     public String toCSV() {
         return weatherStationId + ", " + manufactur + ", " + gpcOfWeatherStation + ", "
-                + dataOfInstallation + ", " + locationOfWeatherStation + ", "
-                + dataOfServiceWorks + ", " + descriptionOfServiceWorks;
+                + dataOfInstallation + ", " + locationOfWeatherStation;
     }
 }
 

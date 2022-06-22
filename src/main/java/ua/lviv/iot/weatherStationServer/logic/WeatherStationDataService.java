@@ -9,7 +9,6 @@ import ua.lviv.iot.weatherStationServer.model.WeatherStationData;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class WeatherStationDataService {
     }
 
     public void addWeatherStationData(WeatherStationData weatherStationData) {
-        weatherStationDatas.put(weatherStationData.getWeatherStationDataId(), weatherStationData);
+        weatherStationDatas.put(weatherStationData.getWeatherStationId(), weatherStationData);
     }
 
     public void updateWeatherStationData(WeatherStationData weatherStationData, Long weatherStationDataId) {
@@ -41,7 +40,7 @@ public class WeatherStationDataService {
 
         this.weatherStationDatas.remove(weatherStationDataId);
 
-        newWeatherStationData.setWeatherStationDataId(oldWeatherStationData.getWeatherStationDataId());
+        newWeatherStationData.setWeatherStationId(oldWeatherStationData.getWeatherStationId());
 
 
         if (weatherStationData.getTemperature() != null) {
@@ -63,7 +62,7 @@ public class WeatherStationDataService {
             newWeatherStationData.setDirectionOfWind(oldWeatherStationData.getDirectionOfWind());
         }
 
-        this.weatherStationDatas.put(newWeatherStationData.getWeatherStationDataId(), newWeatherStationData);
+        this.weatherStationDatas.put(newWeatherStationData.getWeatherStationId(), newWeatherStationData);
     }
 
     public void deleteWeatherStationData(Long weatherStationDataId) {
@@ -80,11 +79,11 @@ public class WeatherStationDataService {
     }
 
     @PostConstruct
-    private void loadWeatherStationDatas() throws IOException, ParseException {
+    private void loadWeatherStationDatas() throws IOException {
         if (weatherStationDataFileStorage.findWeatherStationDataInMonth() != null) {
             List<WeatherStationData> list = weatherStationDataFileStorage.findWeatherStationDataInMonth();
             for (WeatherStationData weatherStationData: list) {
-                this.weatherStationDatas.put(weatherStationData.getWeatherStationDataId(), weatherStationData);
+                this.weatherStationDatas.put(weatherStationData.getWeatherStationId(), weatherStationData);
             }
         }
     }

@@ -22,7 +22,7 @@ public class WeatherStationDataController {
         return weatherStationDataService.getWeatherStationDatas();
     }
 
-    @GetMapping("/{weatherStationDataId}")
+    @GetMapping("/{weatherStationId}")
     public WeatherStationData getWeatherStationDataById(@PathVariable Long weatherStationDataId) {
         return weatherStationDataService.getWeatherStationDataById(weatherStationDataId);
     }
@@ -32,13 +32,13 @@ public class WeatherStationDataController {
         weatherStationDataService.addWeatherStationData(weatherStationData);
     }
 
-    @PutMapping("/{weatherStationDataId}")
+    @PutMapping("/{weatherStationId}")
     public void updateWeatherStationData(@RequestBody WeatherStationData weatherStationData,
                                          @PathVariable Long weatherStationDataId) {
         weatherStationDataService.updateWeatherStationData(weatherStationData, weatherStationDataId);
     }
 
-    @DeleteMapping("/{weatherStationDataId}")
+    @DeleteMapping("/{weatherStationId}")
     public void deleteWeatherStationData(@PathVariable Long weatherStationDataId) {
         weatherStationDataService.deleteWeatherStationData(weatherStationDataId);
     }
