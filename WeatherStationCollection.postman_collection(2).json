@@ -1,0 +1,358 @@
+{
+	"info": {
+		"_postman_id": "67e7cf3c-ecef-48a1-a4dc-9299032a9a7e",
+		"name": "WeatherStationCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21481403"
+	},
+	"item": [
+		{
+			"name": "WeatherStation",
+			"item": [
+				{
+					"name": "addWeatherStation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 2,\r\n    \"manufactur\": \"manufacturOfWeatherStation\",\r\n    \"gpcOfWeatherStation\": \"20.30.45\",\r\n    \"dataOfInstallation\": \"07/Apr/2019\",\r\n    \"locationOfWeatherStation\": \"Lviv (20.30.45\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWeatherStationById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStation/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWeatherStations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateWeatherStation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 2,\r\n    \"manufactur\": \"manufacturOfWeatherStation\",\r\n    \"gpcOfWeatherStation\": \"20.30.45\",\r\n    \"dataOfInstallation\": \"07/Apr/2019\",\r\n    \"locationOfWeatherStation\": \"Kyiv (20.30.45)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStation/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteWeatherStation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStation/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStation",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WeatherStationData",
+			"item": [
+				{
+					"name": "addWeatherStationData",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 2,\r\n    \"temperature\": \"23 C\",\r\n    \"humidity\": \"4 %\",\r\n    \"atmosphericPressure\": \"10 kPa\",\r\n    \"speedOfWind\": \"2 m/s\",\r\n    \"directionOfWind\": \"west\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStationData",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWeatherStationDataByWeatherStationId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStationData/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getWeatherStationDatas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStationData",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateWeatherStationData",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 2,\r\n    \"temperature\": \"30 C\",\r\n    \"humidity\": \"4 %\",\r\n    \"atmosphericPressure\": \"10 kPa\",\r\n    \"speedOfWind\": \"3 m/s\",\r\n    \"directionOfWind\": \"west\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/weatherStationData/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteWeatherStationData",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/weatherStationData/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"weatherStationData",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MaintenanceJob",
+			"item": [
+				{
+					"name": "addMaintenanceJob",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 2,\r\n    \"dataOfServiceWorks\": \"22/Oct/2020\",\r\n    \"descriptionOfServiceWorks\": \"technical works\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/maintenanceJob",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenanceJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMaintenanceJobByWeatherStation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/maintenanceJob/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenanceJob",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMaintenanceJobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/maintenanceJob",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenanceJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMaintenanceJob",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"weatherStationId\": 2,\r\n    \"dataOfServiceWorks\": \"22/Oct/2020\",\r\n    \"descriptionOfServiceWorks\": \"planned works\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/maintenanceJob/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenanceJob",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMaintenanceJob",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/maintenanceJob/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"maintenanceJob",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
