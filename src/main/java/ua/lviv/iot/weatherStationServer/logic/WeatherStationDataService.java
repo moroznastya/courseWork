@@ -1,7 +1,9 @@
 package ua.lviv.iot.weatherStationServer.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ua.lviv.iot.weatherStationServer.datastorage.WeatherStationDataFileStorage;
 import ua.lviv.iot.weatherStationServer.model.WeatherStationData;
 
@@ -26,29 +28,29 @@ public class WeatherStationDataService {
         return new LinkedList<>(this.weatherStationDatas.values());
     }
 
-    public WeatherStationData getWeatherStationDataById(Long weatherStationDataId) {
-        return weatherStationDatas.get(weatherStationDataId);
+    public WeatherStationData getWeatherStationDataById(Long weatherStationId) {
+        if (weatherStationDatas.containsKey(weatherStationId)){
+            return weatherStationDatas.get(weatherStationId);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        }
     }
 
     public void addWeatherStationData(WeatherStationData weatherStationData) {
         weatherStationDatas.put(weatherStationData.getWeatherStationId(), weatherStationData);
     }
 
-    public void updateWeatherStationData(WeatherStationData weatherStationData, Long weatherStationDataId) {
-        WeatherStationData oldWeatherStationData = this.weatherStationDatas.get(weatherStationDataId);
+    public void updateWeatherStationData(WeatherStationData weatherStationData, Long weatherStationId) {
+
         WeatherStationData newWeatherStationData = new WeatherStationData();
 
-        this.weatherStationDatas.remove(weatherStationDataId);
+        this.weatherStationDatas.remove(weatherStationId);
 
-        newWeatherStationData.setWeatherStationId(oldWeatherStationData.getWeatherStationId());
+        newWeatherStationData.setWeatherStationId(weatherStationData.getWeatherStationId());
 
-
-        if (weatherStationData.getTemperature() != null) {
-            newWeatherStationData.setTemperature(weatherStationData.getTemperature());
-        } else {
-            newWeatherStationData.setTemperature(oldWeatherStationData.getTemperature());
-        }
-
+        newWeatherStationData.setTemperature(weatherStationData.getTemperature());
 
         newWeatherStationData.setHumidity(weatherStationData.getHumidity());
 
@@ -56,17 +58,13 @@ public class WeatherStationDataService {
 
         newWeatherStationData.setSpeedOfWind(weatherStationData.getSpeedOfWind());
 
-        if (weatherStationData.getDirectionOfWind() != null) {
-            newWeatherStationData.setDirectionOfWind(weatherStationData.getDirectionOfWind());
-        } else {
-            newWeatherStationData.setDirectionOfWind(oldWeatherStationData.getDirectionOfWind());
-        }
+        newWeatherStationData.setDirectionOfWind(weatherStationData.getDirectionOfWind());
 
         this.weatherStationDatas.put(newWeatherStationData.getWeatherStationId(), newWeatherStationData);
     }
 
-    public void deleteWeatherStationData(Long weatherStationDataId) {
-        this.weatherStationDatas.remove(weatherStationDataId);
+    public void deleteWeatherStationData(Long weatherStationId) {
+        this.weatherStationDatas.remove(weatherStationId);
     }
 
 

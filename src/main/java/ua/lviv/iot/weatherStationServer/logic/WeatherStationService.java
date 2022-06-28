@@ -2,7 +2,9 @@ package ua.lviv.iot.weatherStationServer.logic;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ua.lviv.iot.weatherStationServer.datastorage.WeatherStationFileStorage;
 import ua.lviv.iot.weatherStationServer.model.WeatherStation;
 
@@ -17,12 +19,11 @@ import java.util.List;
 public class WeatherStationService {
 
 
-    HashMap<Long, WeatherStation> weatherStations = new HashMap<>();
+    private final HashMap<Long, WeatherStation> weatherStations = new HashMap<>();
 
 
     @Autowired
-    WeatherStationFileStorage weatherStationStore =new WeatherStationFileStorage();
-    //WeatherStationFileStorage weatherStationFileStorage;
+    WeatherStationFileStorage weatherStationStore;
 
 
     public List<WeatherStation> getWeatherStations() {
@@ -31,8 +32,13 @@ public class WeatherStationService {
     }
 
     public WeatherStation getWeatherStationById(Long weatherStationId) {
-
-        return weatherStations.get(weatherStationId);
+        if (weatherStations.containsKey(weatherStationId)){
+            return weatherStations.get(weatherStationId);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        }
     }
 
     public void addWeatherStation(WeatherStation weatherStation) {
@@ -40,38 +46,20 @@ public class WeatherStationService {
     }
 
     public void updateWeatherStation(WeatherStation weatherStation, Long weatherStationId) {
-        WeatherStation oldWeatherStation = this.weatherStations.get(weatherStationId);
+
         WeatherStation newWeatherStation = new WeatherStation();
 
         this.weatherStations.remove(weatherStationId);
 
-        newWeatherStation.setWeatherStationId(oldWeatherStation.getWeatherStationId());
+        newWeatherStation.setWeatherStationId(weatherStation.getWeatherStationId());
 
+        newWeatherStation.setManufactur(weatherStation.getManufactur());
 
-        if (weatherStation.getManufactur() != null) {
-            newWeatherStation.setManufactur(weatherStation.getManufactur());
-        } else {
-            newWeatherStation.setManufactur(oldWeatherStation.getManufactur());
-        }
+        newWeatherStation.setGpcOfWeatherStation(weatherStation.getGpcOfWeatherStation());
 
-        if (weatherStation.getGpcOfWeatherStation() != null) {
-            newWeatherStation.setGpcOfWeatherStation(weatherStation.getGpcOfWeatherStation());
-        } else {
-            newWeatherStation.setGpcOfWeatherStation(oldWeatherStation.getGpcOfWeatherStation());
-        }
+        newWeatherStation.setDataOfInstallation(weatherStation.getDataOfInstallation());
 
-        if (weatherStation.getDataOfInstallation() != null) {
-            newWeatherStation.setDataOfInstallation(weatherStation.getDataOfInstallation());
-        } else {
-            newWeatherStation.setDataOfInstallation(oldWeatherStation.getDataOfInstallation());
-        }
-
-        if (weatherStation.getLocationOfWeatherStation() != null) {
-            newWeatherStation.setLocationOfWeatherStation(weatherStation.getLocationOfWeatherStation());
-        } else {
-            newWeatherStation.setLocationOfWeatherStation(oldWeatherStation.getLocationOfWeatherStation());
-        }
-
+        newWeatherStation.setLocationOfWeatherStation(weatherStation.getLocationOfWeatherStation());
 
         this.weatherStations.put(newWeatherStation.getWeatherStationId(), newWeatherStation);
     }

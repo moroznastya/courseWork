@@ -1,20 +1,18 @@
 package ua.lviv.iot.weatherStationServer.datastorage;
 import org.springframework.stereotype.Component;
 import ua.lviv.iot.weatherStationServer.model.WeatherStation;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
+
 
 @Component
-public class WeatherStationFileStorage {
-
+public class WeatherStationFileStorage extends Storage{
+    private final String path = getPath("weatherStation");
 
     public List<WeatherStation> findWeatherStationInMonth() throws IOException {
         List<WeatherStation> result = new LinkedList<>();
@@ -22,8 +20,8 @@ public class WeatherStationFileStorage {
 
         for (int i = 1; i <= LocalDate.now().getDayOfMonth(); i++) {
 
-            if (Files.exists(Paths.get("files//" + "weatherStation-" + "-" + LocalDate.now() + ".csv"))) {
-                file = new File("files//" + "weatherStation-" + LocalDate.now() + ".csv");
+            if (Files.exists(Paths.get(path))) {
+                file = new File(path);
                 result.addAll(scanWeatherStation(file));
             }
 
@@ -33,49 +31,23 @@ public class WeatherStationFileStorage {
 
     private List<WeatherStation> scanWeatherStation(File file) throws IOException {
         List<WeatherStation> result = new LinkedList<>();
-        boolean isFirst = true;
-        Scanner scanner = new Scanner(file, "UTF_8");
+        prepareFileForReading(file);
+        String [] values;
         while (scanner.hasNextLine()) {
-            if (!isFirst) {
-                List<String> values = Arrays.stream(scanner.nextLine().split(", ")).toList();
-                result.add(fillWeatherStation(values));
-            } else {
-                scanner.nextLine();
-                isFirst = false;
+            values = getNextLineFromFile();
+            if(values != null) {
+                result.add(new WeatherStation
+                        (Long.valueOf(values[0]), values[1], values[2], values[3],
+                                values[4]));
             }
         }
         return result;
     }
 
 
-    public WeatherStation fillWeatherStation(List<String> values) {
-        WeatherStation weatherStation = new WeatherStation();
-        int index = 0;
-        for (String value : values) {
-            switch (index) {
-                case 0 -> weatherStation.setWeatherStationId(Long.parseLong(value));
-
-                case 1 -> weatherStation.setManufactur(value);
-
-                case 2 -> weatherStation.setGpcOfWeatherStation(value);
-
-                case 3 -> weatherStation.setDataOfInstallation(value);
-
-                case 4 -> weatherStation.setLocationOfWeatherStation(value);
-
-                default -> { }
-            }
-
-            index++;
-
-        }
-        return weatherStation;
-
-    }
     public void saveWeatherStation(List<WeatherStation> weatherStations) throws IOException {
 
-
-        File file = new File("files//" + "weatherStation-" + LocalDate.now() + ".csv");
+        File file = new File(path);
         Writer writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
         writer.write(weatherStations.get(0).getHeaders() + "\n");
         for (WeatherStation weatherStation : weatherStations) {

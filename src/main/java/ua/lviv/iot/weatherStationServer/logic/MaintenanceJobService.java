@@ -2,7 +2,9 @@ package ua.lviv.iot.weatherStationServer.logic;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ua.lviv.iot.weatherStationServer.datastorage.MaintenanceJobFileStorage;
 import ua.lviv.iot.weatherStationServer.model.MaintenanceJob;
 
@@ -17,7 +19,7 @@ import java.util.List;
 public class MaintenanceJobService {
 
 
-    HashMap<Long, MaintenanceJob> maintenanceJobs = new HashMap<>();
+    private final HashMap<Long, MaintenanceJob> maintenanceJobs = new HashMap<>();
 
 
     @Autowired
@@ -30,8 +32,14 @@ public class MaintenanceJobService {
     }
 
     public MaintenanceJob getMaintenanceJobByWeatherStationId(Long weatherStationId) {
+        if (maintenanceJobs.containsKey(weatherStationId)){
+            return maintenanceJobs.get(weatherStationId);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        }
 
-        return maintenanceJobs.get(weatherStationId);
     }
 
     public void addMaintenanceJob(MaintenanceJob maintenanceJob) {
@@ -39,25 +47,15 @@ public class MaintenanceJobService {
     }
 
     public void updateMaintenanceJob(MaintenanceJob maintenanceJob, Long weatherStationId) {
-        MaintenanceJob oldMaintenanceJob = this.maintenanceJobs.get(weatherStationId);
         MaintenanceJob newMaintenanceJob = new MaintenanceJob();
 
         this.maintenanceJobs.remove(weatherStationId);
 
-        newMaintenanceJob.setWeatherStationId(oldMaintenanceJob.getWeatherStationId());
+        newMaintenanceJob.setWeatherStationId(maintenanceJob.getWeatherStationId());
 
-        if (maintenanceJob.getDataOfServiceWorks() != null) {
-            newMaintenanceJob.setDataOfServiceWorks(oldMaintenanceJob.getDataOfServiceWorks());
-        } else {
-            newMaintenanceJob.setDataOfServiceWorks(oldMaintenanceJob.getDataOfServiceWorks());
-        }
+        newMaintenanceJob.setDataOfServiceWorks(maintenanceJob.getDataOfServiceWorks());
 
-        if (maintenanceJob.getDescriptionOfServiceWorks() != null) {
-            newMaintenanceJob.setDescriptionOfServiceWorks(oldMaintenanceJob.getDescriptionOfServiceWorks());
-        } else {
-            newMaintenanceJob.setDescriptionOfServiceWorks(oldMaintenanceJob.getDescriptionOfServiceWorks());
-        }
-
+        newMaintenanceJob.setDescriptionOfServiceWorks(maintenanceJob.getDescriptionOfServiceWorks());
 
         this.maintenanceJobs.put(newMaintenanceJob.getWeatherStationId(), newMaintenanceJob);
     }
