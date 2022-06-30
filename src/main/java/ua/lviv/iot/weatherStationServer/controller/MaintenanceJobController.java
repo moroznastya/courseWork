@@ -1,7 +1,9 @@
 package ua.lviv.iot.weatherStationServer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ua.lviv.iot.weatherStationServer.logic.MaintenanceJobService;
 import ua.lviv.iot.weatherStationServer.model.MaintenanceJob;
 
@@ -21,7 +23,14 @@ public class MaintenanceJobController {
 
     @GetMapping("/{weatherStationId}")
     public MaintenanceJob getMaintenanceJobByWeatherStationId(@PathVariable Long weatherStationId) {
-        return maintenanceJobService.getMaintenanceJobByWeatherStationId(weatherStationId);
+        if(maintenanceJobService.getMaintenanceJobByWeatherStationId(weatherStationId) == null){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        } else {
+            return maintenanceJobService.getMaintenanceJobByWeatherStationId(weatherStationId);
+        }
+
     }
 
     @PostMapping

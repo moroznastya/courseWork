@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 
-public class Storage {
+public abstract class Storage {
     protected Scanner scanner;
 
     public void prepareFileForReading(File file) throws IOException {

@@ -35,9 +35,7 @@ public class WeatherStationService {
         if (weatherStations.containsKey(weatherStationId)){
             return weatherStations.get(weatherStationId);
         } else {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "entity not found"
-            );
+            return null;
         }
     }
 
